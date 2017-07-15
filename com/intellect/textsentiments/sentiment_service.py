@@ -8,5 +8,4 @@ sentiment_service_api = Blueprint("sentiment_service_api", __name__)
 
 @sentiment_service_api.route('/risk/article/sentiment', methods=['POST'])
 def get_articles():
-    print 'hi'
     return json.loads(request.form.get('ArticleId'))
