@@ -1,7 +1,11 @@
 from flask import Flask, request, send_from_directory
 import os
+from com.intellect.textsentiments.sentiment_service import sentiment_service_api
+
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
+
+app.register_blueprint(sentiment_service_api)
 
 @app.route('/api-docs/<path:path>')
 def launch_swagger(path):
@@ -10,7 +14,6 @@ def launch_swagger(path):
     response = send_from_directory(file_dir, path)
     if '.json' in path:
         response.headers['Content-Type'] = "application/json"
-
     return response;
 
 if __name__ == "__main__":
