@@ -4,6 +4,7 @@ from flask import Flask, request, Blueprint
 
 sentiment_db_api = Blueprint("sentiment_db_api", __name__)
 
+
 @sentiment_db_api.route('/api/sentiment', methods=['POST'])
 def get_articles():
     host = "mongodb://localhost:27017"

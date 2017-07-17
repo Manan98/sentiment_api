@@ -107,7 +107,7 @@
         },
 		"Article" : {
       "type" : "object",
-      "required" : [ "ArticleId", "ProcessedTerm" ],
+      "required" :[ "ArticleId", "ProcessedTerm" ],
       "properties" : {
         "ArticleId" : {
           "type" : "string",

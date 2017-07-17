@@ -8,6 +8,7 @@ from flask.ext.cors import CORS
 app = Flask(__name__, static_url_path='')
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
+
 app.register_blueprint(sentiment_db_api)
 #app.register_blueprint(sentiment_service_api)
 
