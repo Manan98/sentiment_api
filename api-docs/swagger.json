@@ -5,10 +5,10 @@
         "version": "1.0.2",
         "title": "Intellect - AI"
     },
-    "basePath": "/ra-services/api",
-    "host": "infomedia.intellectseeccloud.com",
+    "basePath": "/api",
+    "host": "localhost:5008",
     "schemes": [
-        "https"
+        "http"
      ],
     "securityDefinitions": {
         "UserSecurity": {
@@ -28,7 +28,7 @@
         }
     ],
     "paths": {
-      "/risk/article/sentiment" : {
+      "/sentiment" : {
       "post" : {
         "tags" : [ "Article Sentiments" ],
         "summary" : "Generate sentiment of an Article",
@@ -107,110 +107,23 @@
         },
 		"Article" : {
       "type" : "object",
-      "required" : [ "ArticleId", "ArticleUrl", "Authors", "BodyText", "Captions", "Heading", "id", "Lead", "PageIds", "Paragraph", "PublishDate", "Score", "Section", "Source", "SubHeading" ],
+      "required" : [ "ArticleId", "ProcessedTerm" ],
       "properties" : {
-        "id" : {
-          "type" : "string"
-        },
-        "ArticleUrl" : {
-          "type" : "string",
-          "xml" : {
-            "name" : "ArticleUrl"
-          }
-        },
-        "Heading" : {
-          "type" : "string",
-          "xml" : {
-            "name" : "Heading"
-          }
-        },
-        "SubHeading" : {
-          "type" : "string",
-          "xml" : {
-            "name" : "SubHeading"
-          }
-        },
-        "Lead" : {
-          "type" : "string",
-          "xml" : {
-            "name" : "Lead"
-          }
-        },
-        "Paragraph" : {
-          "type" : "string",
-          "xml" : {
-            "name" : "Paragraph"
-          }
-        },
-        "PublishDate" : {
-          "type" : "string",
-          "xml" : {
-            "name" : "PublishDate"
-          }
-        },
-        "BodyText" : {
-          "type" : "string",
-          "xml" : {
-            "name" : "BodyText"
-          }
-        },
-        "Captions" : {
-          "type" : "array",
-          "xml" : {
-            "name" : "Captions"
-          },
-          "items" : {
-            "type" : "string"
-          }
-        },
-        "Authors" : {
-          "type" : "array",
-          "xml" : {
-            "name" : "Authors"
-          },
-          "items" : {
-            "type" : "string"
-          }
-        },
-        "Source" : {
-          "type" : "string",
-          "xml" : {
-            "name" : "Source"
-          }
-        },
-        "WordCount" : {
-          "type" : "integer",
-          "format" : "int64",
-          "xml" : {
-            "name" : "WordCount"
-          }
-        },
         "ArticleId" : {
           "type" : "string",
           "xml" : {
             "name" : "ArticleId"
           }
         },
-        "Score" : {
+        "ProcessedTerm":
+        {
+
           "type" : "string",
           "xml" : {
-            "name" : "Score"
+            "name" : "ProcessedTerm"
           }
-        },
-        "Section" : {
-          "xml" : {
-            "name" : "Section"
-          },
-          "$ref" : "#/definitions/Section"
-        },
-        "PageIds" : {
-          "type" : "array",
-          "xml" : {
-            "name" : "PageIds"
-          },
-          "items" : {
-            "type" : "string"
-          }
+
+
         }
       }
     },
