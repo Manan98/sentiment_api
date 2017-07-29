@@ -1,16 +1,19 @@
-from flask import Flask, request, send_from_directory
+from flask import Flask, send_from_directory
 import os
-from com.intellect.textsentiments.sentiment_db import sentiment_db_api
-#from com.intellect.textsentiments.sentiment_service import sentiment_service_api
+from com.intellect.textsentiments.sentiment_service import sentiment_service_api
+from com.intellect.textsentiments.sentiment_file_service import sentiment_file_api
 from flask.ext.cors import CORS
 
-# set the project root directory as the static folder, you can set others.
+#current_dir = os.getcwd()
+#UPLOAD_FOLDER = current_dir+'/com/intellect/textsentiments/files'
+#ALLOWED_EXTENSIONS = set(['csv'])
+
 app = Flask(__name__, static_url_path='')
+#app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-
-app.register_blueprint(sentiment_db_api)
-#app.register_blueprint(sentiment_service_api)
+app.register_blueprint(sentiment_file_api)
+app.register_blueprint(sentiment_service_api)
 
 @app.route('/api-docs/<path:path>')
 def launch_swagger(path):
@@ -22,4 +25,4 @@ def launch_swagger(path):
     return response;
 
 if __name__ == "__main__":
-    app.run("0.0.0.0", port=5008)
+    app.run("0.0.0.0", port=5010)

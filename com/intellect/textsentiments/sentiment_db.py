@@ -1,18 +1,25 @@
-import json
+# -*- coding: utf-8 -*-
 from pymongo import MongoClient
-from flask import Flask, request, Blueprint
+from datetime import datetime
+import sentiment_service
 
-sentiment_db_api = Blueprint("sentiment_db_api", __name__)
+sent_instance = sentiment_service
 
-@sentiment_db_api.route('/api/sentiment', methods=['POST'])
-def get_articles():
+class SentDB:
+
     host = "mongodb://localhost:27017"
-    print("############# initializing Mongo DB Client")
-    client = MongoClient(host)
-    db = client.infomedia_db_1
-    sentiment_collection = db.infomedia_articles_jul_14
-    id = (str)(request.get_json()['ArticleId'])
-    pt = (str)(request.get_json()['ProcessedTerm'])
-    sentiment_cursor = sentiment_collection.find({ "article_id": id })
-    score = [field['predicted_score'] for field in sentiment_cursor if pt.lower() in (str)(field['processed_terms']).lower()]
-    return json.dumps({"Score":score})
+    client = None
+    db = None
+    sentiment_collection = None
+
+    def __init__(self):
+        print("############# initializing Mongo DB Client")
+        self.client = MongoClient(self.host)
+        self.db = self.client.infomedia_db_logs
+        self.sentiment_collection = self.db.sentiment_api_logs
+
+    def save_record(self, entry):
+        entry['time of call'] = datetime.now()
+        result = self.sentiment_collection.insert_one(entry)
+        print(" >> record inserted successfully id = " + str(result.inserted_id))
+        return str(result.inserted_id)
